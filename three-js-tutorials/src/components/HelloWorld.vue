@@ -22,24 +22,37 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul> -->
+    <Renderer
+      ref="renderer"
+      resize
+      antialias
+      :orbit-ctrl="{
+        autoRotate: true,
+        enableDamping: true,
+        dampingFactor: 0.05,
+      }"
+    >
+      <Camera :position="{ x: 0, y: 0, z: 10 }" />
+      <Scene background="#ffffff">
+        <Box
+          ref="mesh"
+          :size="3"
+          :rotation="{ y: Math.PI / 4, z: Math.PI / 4 }"
+        >
+          <MatcapMaterial name="2E763A_78A0B7_B3D1CF_14F209" />
+        </Box>
+      </Scene>
+    </Renderer>
   </div>
-  <Renderer ref="renderer" resize antialias :orbit-ctrl="{ autoRotate: true, enableDamping: true, dampingFactor: 0.05 }">
-    <Camera :position="{ x: 0, y: 0, z: 10 }" />
-    <Scene background="#ffffff">
-      <Box ref="mesh" :size="3" :rotation="{ y: Math.PI / 4, z: Math.PI / 4 }">
-        <MatcapMaterial name="2E763A_78A0B7_B3D1CF_14F209" />
-      </Box>
-    </Scene>
-  </Renderer>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
-    msg: String
-  }
-}
+    msg: String,
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
