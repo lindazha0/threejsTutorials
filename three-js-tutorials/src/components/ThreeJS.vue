@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      text: require("/Users/linda/Desktop/threejsTutorials/three-js-tutorials/src/assets/3.jpg"),
+      // text: require("../public/assets/3.jpg"),
     };
   },
   methods: {
@@ -42,10 +42,10 @@ export default {
       camera.position.z = 4; // since the cube will be put (0,0,0)
 
       // create a cube with deometry(skeleton) & material(surface)
-      const geometry = new THREE.OctahedronGeometry();
+      const geometry = new THREE.IcosahedronGeometry();
       //   const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // simplest surface with only color
       const material = new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load(this.text),
+        map: new THREE.TextureLoader().load("/img/copy.jpg"),
       }); // attach texture
       // use Phong/ Lambert to adjust more advanced materials
       const cube = new THREE.Mesh(geometry, material);

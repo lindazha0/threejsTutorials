@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-row>
-      <img alt="Vue logo" src="./assets/logo.png" width="1000" height="10"/>
+      <img alt="Vue logo" src="../public/img/logo.png" width="1000" height="10"/>
     </el-row>
     <el-row :gutter="20">
       <el-col :span="12">
-        <troisInternal msg="Welcome to Your Vue.js App" />
+        <troisInternal msg="Welcome to My Vue.js App with Three.js" />
       </el-col>
       <el-col :span="12">
         <troisModel />

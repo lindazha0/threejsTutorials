@@ -8,7 +8,7 @@
 /* eslint-disable */
 // render a spinning cube
 import * as THREE from "three";
-// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 export default {
   mounted() {
@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      text: require("/Users/linda/Desktop/threejsTutorials/three-js-tutorials/src/assets/3.jpg"),
+      //   text: require("../public/assets/3.jpg"),
     };
   },
   methods: {
@@ -46,60 +46,90 @@ export default {
       const geometry = new THREE.OctahedronGeometry();
       //   const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // simplest surface with only color
       const material = new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load(this.text),
+        map: new THREE.TextureLoader().load("/img/copy.jpg"),
       }); // attach texture
-      // use Phong/ Lambert to adjust more advanced materials
-      const cube = new THREE.Mesh(geometry, material);
-      // eslint-disable-next-line
-      scene.add(cube);
+      //   use Phong/ Lambert to adjust more advanced materials
+      const oct = new THREE.Mesh(geometry, material);
+      oct.position.set(-1, -1, 1);
+      scene.add(oct);
 
       //   load model
       // load sakura model
-    //   const loader = new GLTFLoader();
-    //   loader.load(
-    //     "/Users/linda/Desktop/threejsTutorials/three-js-tutorials/src/assets/models/sakura/scene.gltf",
-    //     function (gltf) {
-    //       gltf.scene.scale.setScalar(0.3);
-    //       // gltf.scene.rotation.y = -Math.PI / 2;
+      const loader = new GLTFLoader();
+      let sakura;
+      loader.load(
+        `/sakura/scene.gltf`,
+        function (gltf) {
+          gltf.scene.scale.setScalar(0.3);
+          // gltf.scene.rotation.y = -Math.PI / 2;
 
-    //       sakura = gltf.scene;
-    //       sakura.position.y = 3;
-    //       scene.add(sakura);
-    //     },
-    //     function (xhr) {
-    //       console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-    //     },
-    //     function (error) {
-    //       console.log("An error happened while loading sakura");
-    //     }
-    //   );
+          sakura = gltf.scene;
+          sakura.position.y = 2;
+          scene.add(sakura);
+          animate();
+          console.log(sakura);
+        },
+        function (xhr) {
+          if (xhr.loaded < xhr.total) {
+            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+          }
+          return;
+        },
+        function (error) {
+          console.log("An error happened while loading sakura");
+          console.error(error);
+        }
+      );
 
-      //   loader.load(
-      //     "/Users/linda/Desktop/threejsTutorials/three-js-tutorials/src/assets/models/calibur/scene.gltf",
-      //     (gltf) => {
-      //       let model = gltf.scene;
-      //       model.traverse((o) => {
-      //       //将图片作为纹理加载
-      //       let explosionTexture = new THREE.TextureLoader().load(
-      //         '/seraphine/textures/Mat_cwfyfr1_userboy17.bmp_diffuse.png'
-      //       )
-      //       //调整纹理图的方向
-      //       explosionTexture.flipY = false
-      //       //将纹理图生成基础网格材质(MeshBasicMaterial)
-      //       const material = new THREE.MeshBasicMaterial({
-      //         map: explosionTexture,
-      //       })
-      //       //给模型每部分上材质
-      //       o.material = material
-      //     })
-      //       scene.add(model);
-      //     },
-      //     undefined,
-      //     function (error) {
-      //       console.error(error);
-      //     }
-      //   );
+      var axesHelper = new THREE.AxesHelper(100);
+      scene.add(axesHelper);
+
+      loader.load(
+        "/models/calibur/scene.gltf",
+        (gltf) => {
+          let model = gltf.scene;
+          model.traverse((o) => {
+            //将图片作为纹理加载
+            let explosionTexture = new THREE.TextureLoader().load(
+              "/models/calibur/textures/Limbs_baseColor.png"
+            );
+            //调整纹理图的方向
+            explosionTexture.flipY = false;
+            //将纹理图生成基础网格材质(MeshBasicMaterial)
+            const material = new THREE.MeshBasicMaterial({
+              map: explosionTexture,
+            });
+            //给模型每部分上材质
+            o.material = material;
+          });
+          scene.add(model);
+          model.position.set(2, -2, -1);
+          console.log(model);
+        },
+        undefined,
+        function (error) {
+          console.error(error);
+        }
+      );
+      // render LOOP
+      function animate() {
+        // internal func: callback in a regular basis
+        requestAnimationFrame(animate);
+
+        // rotate
+        oct.rotation.y += 0.01;
+        sakura.rotation.y += 0.01;
+        // model.rotation.y += 0.01;
+
+        renderer.render(scene, camera);
+      }
     },
   },
 };
 </script>
+
+<style scoped>
+#model {
+  float: right;
+}
+</style>

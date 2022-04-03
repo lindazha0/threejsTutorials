@@ -53,6 +53,9 @@
               <Texture
                 src="https://th.bing.com/th/id/OIP.E4JUVdyJbjn7V1tnxNhRwAHaF7?pid=ImgDet&rs=1"
               />
+              <!-- <Texture
+                src="/Users/linda/Desktop/threejsTutorials/three-js-tutorials/public/assets/3.jpg"
+              /> -->
             </PhongMaterial>
           </Plane>
 
@@ -97,8 +100,7 @@ export default {
   // },
   data() {
     return {
-      // model: require('/Users/linda/Desktop/threejsTutorials/three-js-tutorials/src/assets/models/SambaDancing.fbx'),
-      text: require("/Users/linda/Desktop/threejsTutorials/three-js-tutorials/src/assets/3.jpg"),
+      // text: require("/Users/linda/Desktop/threejsTutorials/three-js-tutorials/public/assets/3.jpg"),
       target: new Vector3(0, 100, 0),
     };
   },
@@ -126,9 +128,13 @@ export default {
       });
     },
     moveOct() {
-      const cube = this.$refs.oct.mesh;
+      // move two mesh
+      const oct = this.$refs.oct.mesh;
+      const cube = this.$refs.box.mesh;
       // transplace: comment them to learn about axis!
       let pos = [-50, -20, 0, 20, 50];
+      oct.position.x = pos[Math.floor(Math.random() * 5)];
+      oct.position.z = pos[Math.floor(Math.random() * 5)];
       cube.position.x = pos[Math.floor(Math.random() * 5)];
       cube.position.z = pos[Math.floor(Math.random() * 5)];
     },
