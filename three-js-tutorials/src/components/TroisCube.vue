@@ -19,10 +19,10 @@
           :size="3"
           :rotation="{ y: Math.PI / 4, z: Math.PI / 4 }"
         >
-          <!-- <MatcapMaterial name="2E763A_78A0B7_B3D1CF_14F209" /> -->
-          <PhongMaterial>
+          <MatcapMaterial name="2E763A_78A0B7_B3D1CF_14F209" />
+          <!-- <PhongMaterial>
             <Texture src="/img/copy.jpg" />
-          </PhongMaterial>
+          </PhongMaterial> -->
         </Box>
       </Scene>
     </Renderer>

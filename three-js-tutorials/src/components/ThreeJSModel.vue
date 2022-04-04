@@ -67,7 +67,7 @@ export default {
           sakura.position.y = 2;
           scene.add(sakura);
           animate();
-          console.log(sakura);
+          // console.log(sakura);
         },
         function (xhr) {
           if (xhr.loaded < xhr.total) {
@@ -84,10 +84,11 @@ export default {
       var axesHelper = new THREE.AxesHelper(100);
       scene.add(axesHelper);
 
+      let model, mixer
       loader.load(
         "/models/calibur/scene.gltf",
         (gltf) => {
-          let model = gltf.scene;
+          model = gltf.scene;
           model.traverse((o) => {
             //将图片作为纹理加载
             let explosionTexture = new THREE.TextureLoader().load(
@@ -104,13 +105,22 @@ export default {
           });
           scene.add(model);
           model.position.set(2, -2, -1);
-          console.log(model);
+          // console.log(gltf);
+          
+
+          // add animations
+          mixer = new THREE.AnimationMixer(model);
+          let clip = THREE.AnimationClip.findByName(gltf.animations, "Walk")
+          const action = mixer.clipAction(clip);
+          action.play();
         },
         undefined,
         function (error) {
           console.error(error);
         }
       );
+      const clock = new THREE.Clock();
+
       // render LOOP
       function animate() {
         // internal func: callback in a regular basis
@@ -119,6 +129,7 @@ export default {
         // rotate
         oct.rotation.y += 0.01;
         sakura.rotation.y += 0.01;
+        if(clock) mixer.update(clock.getDelta())
         // model.rotation.y += 0.01;
 
         renderer.render(scene, camera);
