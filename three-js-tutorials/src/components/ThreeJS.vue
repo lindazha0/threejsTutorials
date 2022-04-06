@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id='threeCanvas'>
     <canvas id="cube" width="300" height="300"></canvas>
   </div>
 </template>

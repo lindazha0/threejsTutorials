@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-// import App from './App.vue'
+import App from './App.vue'
 import routes from './router'
 import {createRouter, createWebHashHistory} from 'vue-router';
 // element-plus
@@ -10,7 +10,7 @@ import * as Icons from '@element-plus/icons-vue'
 // TroisJS
 import {TroisJSVuePlugin} from 'troisjs'
 
-const app = createApp({el:'#app'})
+const app = createApp(App)
 
 // use all icons
 for (let i in Icons){
@@ -22,7 +22,7 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes, // `routes: routes` 的缩写
   })
-// console.log(app)
+console.log(router)
 app.use(router)
 
 app.use(TroisJSVuePlugin).use(ElementUI).mount('#app')
