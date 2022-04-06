@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-row>
+    <!-- <el-row>
       <img alt="Vue logo" src="../public/img/logo.png" width="1000" height="10"/>
     </el-row>
     <el-row :gutter="20">
@@ -18,7 +18,7 @@
       <el-col :span="12">
         <threeModel />
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
 
@@ -31,7 +31,6 @@ import ThreeJS from "./components/ThreeJS.vue";
 import ThreeJSModel from "./components/ThreeJSModel.vue";
 
 export default {
-  components: { ThreeJS },
   name: "App",
   components: {
     troisInternal: HelloWorld,

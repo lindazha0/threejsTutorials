@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <img alt="Vue logo" src="../../public/img/logo.png" :width="10">
+    <img alt="Vue logo" src="/img/logo.png" :width="10">
     <h1>{{ msg }}</h1>
     <Renderer
       ref="renderer"
